@@ -42,14 +42,14 @@ fn tick(board: [[bool; BOARD_SIZE]; BOARD_SIZE]) -> [[bool; BOARD_SIZE]; BOARD_S
         for (x, cell) in row.iter().enumerate() {
             let (alive, _) = neighbor_counts(board, x, y);
 
-            new_board[y][x] = match cell {
+            new_board[y][x] = match *cell {
                 true => {
                     // Live cell
                     match alive {
                         // Match number of alive neighbors
-                        0...1 => false,
-                        2...3 => true,
-                        4...8 => false,
+                        0..=1 => false,
+                        2..=3 => true,
+                        4..=8 => false,
                         _ => false,
                     }
                 },
